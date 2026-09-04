@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#173f35">
+  <meta name="description" content="Belege fotografieren, lokal sammeln und als ZIP exportieren.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Belegsammler</title>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="mark" aria-hidden="true">B</div>
+      <div><h1>Belegsammler</h1><p id="status">Bereit</p></div>
+    </header>
+
+    <section class="capture card" aria-labelledby="capture-title">
+      <h2 id="capture-title">Neuen Beleg sichern</h2>
+      <label class="primary-button" for="cameraInput">📷 Beleg fotografieren</label>
+      <input id="cameraInput" class="visually-hidden" type="file" accept="image/*" capture="environment">
+      <label class="secondary-button" for="fileInput">Bild auswählen</label>
+      <input id="fileInput" class="visually-hidden" type="file" accept="image/*">
+      <p class="hint">Das Bild wird nur auf diesem Gerät gespeichert.</p>
+    </section>
+
+    <section class="toolbar card" aria-label="Belege verwalten">
+      <button id="exportButton" class="secondary-button" type="button">ZIP + CSV exportieren</button>
+      <button id="deleteAllButton" class="danger-button" type="button">Alle löschen</button>
+    </section>
+
+    <section aria-labelledby="receipts-title">
+      <div class="section-heading"><h2 id="receipts-title">Gespeicherte Belege</h2><span id="countBadge">0</span></div>
+      <div id="emptyState" class="empty card"><span>🧾</span><p>Noch keine Belege gespeichert.</p></div>
+      <div id="receiptList" class="receipt-list"></div>
+    </section>
+  </main>
+
+  <template id="receiptTemplate">
+    <article class="receipt card">
+      <img class="receipt-image" alt="Gespeicherter Beleg">
+      <div class="receipt-details">
+        <div class="receipt-top"><div><h3></h3><time></time></div><button class="delete-button" type="button" aria-label="Beleg löschen">Löschen</button></div>
+        <label>Notiz<input class="note-input" type="text" maxlength="200" placeholder="z. B. Material für Projekt …"></label>
+      </div>
+    </article>
+  </template>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
